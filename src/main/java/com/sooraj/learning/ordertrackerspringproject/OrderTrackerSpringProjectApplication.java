@@ -11,4 +11,8 @@ public class OrderTrackerSpringProjectApplication {
         SpringApplication.run(OrderTrackerSpringProjectApplication.class, args);
     }
 
+//    @Bean
+//    CommandLineRunner seed(CategoryRepository repo) {
+//        return args -> repo.save(new Category("Electronics"));
+//    }
 }
