@@ -21,7 +21,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> createCategory (@RequestBody CreateCategoryRequest request){
+    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CreateCategoryRequest request){
         CategoryResponse created = categoryService.create(request);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

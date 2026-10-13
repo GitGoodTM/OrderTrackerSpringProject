@@ -4,6 +4,7 @@ import com.sooraj.learning.ordertrackerspringproject.dto.CategoryResponse;
 import com.sooraj.learning.ordertrackerspringproject.dto.CreateCategoryRequest;
 import com.sooraj.learning.ordertrackerspringproject.entity.Category;
 import com.sooraj.learning.ordertrackerspringproject.exception.CategoryNotFoundException;
+import com.sooraj.learning.ordertrackerspringproject.exception.DuplicateCategoryException;
 import com.sooraj.learning.ordertrackerspringproject.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public CategoryResponse create(CreateCategoryRequest request) {
+        if(categoryRepository.existsByCategoryName(request.getCategoryName())){
+            throw new DuplicateCategoryException(request.getCategoryName());
+        }
         Category saved = categoryRepository.save(new Category(request.getCategoryName()));
         return new CategoryResponse(saved.getCategoryId(), saved.getCategoryName());
     }
