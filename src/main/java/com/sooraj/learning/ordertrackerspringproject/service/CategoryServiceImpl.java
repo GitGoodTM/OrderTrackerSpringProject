@@ -23,11 +23,11 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public CategoryResponse create(CreateCategoryRequest request) {
-        if(categoryRepository.existsByCategoryName(request.getCategoryName())){
+        if (categoryRepository.existsByCategoryName(request.getCategoryName())){
             throw new DuplicateCategoryException(request.getCategoryName());
         }
         Category saved = categoryRepository.save(new Category(request.getCategoryName()));
-        return new CategoryResponse(saved.getCategoryId(), saved.getCategoryName());
+        return toResponse(saved);
     }
 
     @Override
