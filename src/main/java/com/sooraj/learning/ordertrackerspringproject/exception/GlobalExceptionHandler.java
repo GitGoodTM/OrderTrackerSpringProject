@@ -19,4 +19,13 @@ public class GlobalExceptionHandler {
                 Instant.now());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
+
+    @ExceptionHandler(DuplicateCategoryException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateCategory(DuplicateCategoryException duplicateCategoryException){
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.CONFLICT.value(),
+                "Category Already Exists",
+                duplicateCategoryException.getMessage(),
+                Instant.now());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
 }
